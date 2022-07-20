@@ -1,12 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import Layout from '../components/hocs/Layout';
+import Layout from '../../components/hocs/Layout';
 import Link from "next/link"
 
-const Post = () => {
+const Post = ({ article }) => {
     return (
         <>
             <Layout>
+                { console.log(article) }
                 <section className="pb-20">
                     <div className="pt-20 pb-8 mb-12 bg-cover bg-no-repeat">
                         <div className="container">
@@ -20,7 +21,7 @@ const Post = () => {
                                         </Link>
                                         <span className="text-blueGray-500 text-sm">24 Jan, 2021</span>
                                     </span>
-                                    <h2 className="text-4xl md:text-5xl mt-4 font-bold font-heading">Building your personal blog</h2>
+                                    <h2 className="text-4xl md:text-5xl mt-4 font-bold font-heading">{article[0].attributes.title}</h2>
                                 </div>
                                 <div className="flex justify-center mb-8">
                                     <img className="w-12 h-12 object-cover rounded-full" src="https://picsum.photos/500/500" alt="LW" />
@@ -71,5 +72,31 @@ const Post = () => {
         </>
     );
 };
+
+export async function getStaticPaths() {
+    const res = await fetch(`https://cms.relay.club/api/articles?populate=*`)
+    const articles = await res.json()
+
+    const paths = articles.data.map((article) => ({
+        params: { slug: article.attributes.slug }
+    }))
+
+    return { paths, fallback: false};
+}
+
+export async function getStaticProps({ params }) {
+    const res = await fetch(`https://cms.relay.club/api/articles?filters[slug]=${params.slug}&populate=author.avatar,categories`)
+    const data = await res.json();
+  
+    if (!data) {
+      return {
+        notFound: true,
+      }
+    }
+  
+    return {
+      props: { article: data.data }, // will be passed to the page component as props
+    }
+  }
 
 export default Post;

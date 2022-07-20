@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 
-export default function ArticleLeft() {
+export default function ArticleLeft({ article }) {
   return (
-    <div className="flex flex-wrap -mx-4 mb-12 wow animate__animated animate__fadeIn animated hover-up-5">
+    <div className="flex flex-wrap -mx-4 mb-12 animate__animated animate__fadeIn animated hover-up-5">
       <div className="w-full lg:w-1/2 px-4 lg:pr-20 lg:pt-4 order-1 lg:order-0">
           <Link href="/post">
               <a>
@@ -11,8 +11,8 @@ export default function ArticleLeft() {
               </a>
           </Link>
           <h3 className="my-4 text-xl md:text-2xl font-bold font-heading">
-              <Link href="/post">
-                  <a className="hover:text-red-500"> Why ruby on rails is the best?</a>
+              <Link href={`/blog/${article.attributes.slug}`}>
+                  <a className="hover:text-red-500"> { article.attributes.title }</a>
               </Link>
           </h3>
           <p className="mb-4 text-sm md:text-base leading-loose text-redGray-400">Aenean tempus orci eu est ultrices hendrerit. Fusce suscipit, leo a semper venenatis, felis urna pulvinar nibh, vitae porta erat risus sed mauris. Vestibulum vehicula leo eget libero eleifend, quis dictum eros bibendum. Maecenas convallis tempor varius.</p>
@@ -28,7 +28,7 @@ export default function ArticleLeft() {
       <div className="w-full lg:w-1/2 px-4 mb-8 order-0 lg:order-1">
           <Link href="/post">
               <a>
-                  <img className="h-80 w-full object-cover rounded" src="https://picsum.photos/500/500" alt="LW" />
+                  <img className="h-80 w-full object-cover rounded" src={article.attributes.banner.data.attributes.url} alt="LW" />
               </a>
           </Link>
       </div>
