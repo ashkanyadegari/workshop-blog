@@ -74,7 +74,7 @@ const Post = ({ article }) => {
 };
 
 export async function getStaticPaths() {
-    const res = await fetch(`https://cms.relay.club/api/articles?populate=*`)
+    const res = await fetch(``)
     const articles = await res.json()
 
     const paths = articles.data.map((article) => ({
@@ -85,7 +85,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`https://cms.relay.club/api/articles?filters[slug]=${params.slug}&populate=author.avatar,categories`)
+    const res = await fetch(``)
     const data = await res.json();
   
     if (!data) {

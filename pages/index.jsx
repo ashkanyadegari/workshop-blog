@@ -49,7 +49,7 @@ const Index = ({ articles }) => {
 };
 
 export async function getStaticProps(context) {
-    const res = await fetch(`https://cms.relay.club/api/articles?populate=*`)
+    const res = await fetch(``)
     const articles = await res.json()
   
     if (!articles) {
