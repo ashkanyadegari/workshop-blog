@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './old-css.css';
+@import './animate.min.css';
 
 html,
 body {
@@ -17,4 +19,54 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.container{
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 1rem;
+	padding-left: 1rem;
+}
+@media (min-width: 640px){
+	.container{
+		max-width: 640px;
+	}
+}
+@media (min-width: 768px){
+	.container{
+		max-width: 768px;
+	}
+}
+@media (min-width: 1024px){
+	.container{
+		max-width: 1024px;
+	}
+}
+@media (min-width: 1200px){
+	.container{
+		max-width: 1200px;
+	}
+}
+
+.font-body{
+	font-family:'Montserrat', sans-serif !important;
+}
+.font-heading{
+	font-family: 'Poppins', sans-serif !important;
+}
+
+.text-body{
+	--tw-text-opacity: 1 !important;
+	color: rgba(30, 41, 59, var(--tw-text-opacity)) !important;
+}
+
+.main {
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
